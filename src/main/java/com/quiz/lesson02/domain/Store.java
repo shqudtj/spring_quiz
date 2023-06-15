@@ -2,6 +2,7 @@ package com.quiz.lesson02.domain;
 
 import java.util.Date;
 
+// DTO(Data Transfer Object) = Domain
 public class Store {
 	private int id;
 	private String name;

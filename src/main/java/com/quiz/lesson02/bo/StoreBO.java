@@ -8,17 +8,18 @@ import org.springframework.stereotype.Service;
 import com.quiz.lesson02.dao.StoreMapper;
 import com.quiz.lesson02.domain.Store;
 
-@Service // Spring Bean 으로 만듦
+@Service // java bean을 Spring Bean 으로 만듦
 public class StoreBO {
 
 	// 필드
 	@Autowired
-	private StoreMapper storeMapper;
+	private StoreMapper storeMapper;  // spring bean을 주입받는다. DI
 	
 	// input: x
-	// output: List<Store>
+	// output: List<Store> 즉 storeList	=> 컨트롤러한테 돌려준다.
 	public List<Store> getStoreList() {
-		List<Store> storeList = storeMapper.selectStoreList();
-		return storeList;
+		// List<Store> storeList = storeMapper.selectStoreList();
+		// return storeList;
+		return storeMapper.selectStoreList();
 	}
 }
