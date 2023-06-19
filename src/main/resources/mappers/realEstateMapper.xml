@@ -111,7 +111,9 @@
  	<update id="updateRealEstateById" parameterType="map">
  	UPDATE `realEstate`
  	SET
- 		`type`
- 	
+ 		`type` = #{type}
+ 		, `price` = #{price}
+ 	WHERE
+ 		`id` = #{id}
  	</update>
  </mapper>

@@ -13,9 +13,9 @@ public class Lesson03Quiz03RestController {
 	@Autowired
 	private RealEstateBO realEstateBO;
 	
-	// http://localhost:8080/lesson03/quiz03/1?id=8&...
+	// http://localhost:8080/lesson03/quiz03/1?id=8&type=전세&price=70000
 	// id가 8인 행의 type 을 전세로 바꾸고 price를 70000으로 변경
-	@RequestMapping("/lesson03/quiz03")
+	@RequestMapping("/lesson03/quiz03/1")
 	public String quiz03(
 			@RequestParam("id") int id,
 			@RequestParam("type") String type,

@@ -39,6 +39,6 @@ public class RealEstateBO {
 	
 //	updateRealEstateById(id, type, price)
 	public int updateRealEstateById(int id, String type, int price) {
-		return realEstateMapper.
+		return realEstateMapper.updateRealEstateById(id, type, price);
 	}
 }
