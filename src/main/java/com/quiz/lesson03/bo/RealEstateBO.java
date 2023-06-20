@@ -33,12 +33,24 @@ public class RealEstateBO {
 	}
 	
 //	addRealEstateAsField("썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);
+	// field를 사용하는 경우 asfield를 보편적으로 붙임
 	public int addRealEstateAsField(int realtorId, String address, int area, String type, int price, Integer rentPrice) {
 		return realEstateMapper.insertRealEstateAsField(realtorId, address, area, type, price, rentPrice);
 	}
 	
 //	updateRealEstateById(id, type, price)
+	// input: id, type, price
+	// output: int
+	// where절을 입력하는 경우 By라고 붙임
 	public int updateRealEstateById(int id, String type, int price) {
 		return realEstateMapper.updateRealEstateById(id, type, price);
 	}
+	
+//	public int deleteRealEstateById(int id) {
+//		return realEstateMapper.deleteRealEstateById(id);
+//	}
+	public void deleteRealEstateById(int id) {
+		realEstateMapper.deleteRealEstateById(id);
+	}
+	
 }
