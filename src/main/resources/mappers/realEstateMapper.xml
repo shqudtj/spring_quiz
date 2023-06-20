@@ -53,9 +53,11 @@
 			`real_estate`
 		WHERE <!-- `area` &gt; #{area} and `price` &lt; #{price} -->
 			<![CDATA[
-			 `area` > #{area}
-			 `price` < `price`
+			`type` = '매매'
+			 and `area` > #{area}
+			 and `price` < #{price}
 			 ]]>
+		ORDER BY `id` DESC
  	</select>
  	
  	<insert id="insertRealEstate" parameterType="com.quiz.lesson03.domain.RealEstate">
