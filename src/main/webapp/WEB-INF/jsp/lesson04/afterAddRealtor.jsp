@@ -11,6 +11,7 @@
 </head>
 <body>
 	<div class="container">
+		<h1>공인중개사 정보</h1>
 		<table class="table table-striped">
 			<tr>
 				<th>ID</th>

@@ -23,7 +23,7 @@
 			</div>
 			<div class="form-group">
 				<span>주소</span>
-				<input type="text" id="address" name="address" class="form-control col-5" placeholder="주소를 입력하세요.">
+				<input type="text" id="address" name="address" class="form-control col-9" placeholder="주소를 입력하세요.">
 			</div>
 			<div class="form-group">
 				<span>등급</span>
