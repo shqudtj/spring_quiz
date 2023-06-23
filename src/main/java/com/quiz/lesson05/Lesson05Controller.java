@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.quiz.lesson05.dao.Member;
+
 @Controller
 @RequestMapping("/lesson05")
 public class Lesson05Controller {
@@ -29,7 +31,7 @@ public class Lesson05Controller {
 		musicRanking.add("거짓말");
 		musicRanking.add("보고싶다");
 		
-		model.addAttribute("musicRankings", musicRanking);
+		model.addAttribute("musicRanking", musicRanking);
 		
 		return "lesson05/quiz02_1";
 	}
@@ -78,4 +80,115 @@ public class Lesson05Controller {
 		
 		return "lesson05/quiz02_2";
 	}
+	
+	@GetMapping("/quiz03/1")
+	public String quiz03_1(Model model) {
+		List<Integer> candidates = new ArrayList<>();
+		candidates.add(263001);
+		candidates.add(173942); 
+		candidates.add(563057); 
+		
+		int totalCount= 0;
+		for (Integer count : candidates) {
+			totalCount += count;
+		}
+		
+		model.addAttribute("totalCount", totalCount);
+//		득표 총합 1000000이 이미 문제에 주어져 있지만 직접 적지 않고 totalCount라는 변수를 서버에서 만든 이유는
+//		 유지보수를 할때 어딨는지 찾기 쉽게하기 위해서
+		model.addAttribute("candidates", candidates);
+		
+		return "lesson05/quiz03_1";
+	}
+	
+	@GetMapping("/quiz03/2")
+	public String quiz03_2(Model model) {
+		List<Map<String, Object>> cardBills = new ArrayList<>();
+
+		Map<String, Object> cardBill = new HashMap<>();
+		cardBill.put("store", "GS48");
+		cardBill.put("pay", 7800);
+		cardBill.put("date", "2025-09-14");
+		cardBill.put("installment", "일시불");
+		cardBills.add(cardBill);
+
+		cardBill = new HashMap<>();
+		cardBill.put("store", "현태백화점");
+		cardBill.put("pay", 2750000);
+		cardBill.put("date", "2025-09-18");
+		cardBill.put("installment", "3개월");
+		cardBills.add(cardBill);
+
+		cardBill = new HashMap<>();
+		cardBill.put("store", "요촌치킨");
+		cardBill.put("pay", 180000);
+		cardBill.put("date", "2025-09-20");
+		cardBill.put("installment", "일시불");
+		cardBills.add(cardBill);
+		
+		model.addAttribute("cardBills", cardBills);
+		
+		
+		return "lesson05/quiz03_2";
+	}
+	
+	@GetMapping("/quiz04")
+	public String quiz04(Model model) {
+		
+		List<Member> members = new ArrayList<>();
+
+		Member member = new Member();
+		member.setName("유비");
+		member.setPhoneNumber("010-1234-5678");
+		member.setEmail("youbee@gmail.com");
+		member.setNationality("삼국시대 촉한");
+		member.setIntroduce("저는 촉의 군주 유비입니다. 삼국통일을 위해 열심히 일하겠습니다.");
+		members.add(member);
+
+		member = new Member();
+		member.setName("관우");
+		member.setPhoneNumber("010-1234-5678");
+		member.setEmail("woo@naver.com");
+		member.setNationality("삼국시대 촉한");
+		member.setIntroduce("관우에요. 저는 유비형님 보다 나이는 많지만 일단 아우입니다.");
+		members.add(member);
+
+		member = new Member();
+		member.setName("장비");
+		member.setPhoneNumber("02-111-3333");
+		member.setNationality("삼국시대 촉한");
+		member.setEmail("tools@gmail.com");
+		member.setIntroduce("장비라우");
+		members.add(member);
+
+		member = new Member();
+		member.setName("조조");
+		member.setPhoneNumber("010-0987-4321");
+		member.setNationality("삼국시대 위");
+		member.setEmail("jojo@gmail.com");
+		member.setIntroduce("이름은 조조 자는 맹덕이라 하오");
+		members.add(member);
+
+		member = new Member();
+		member.setName("주유");
+		member.setPhoneNumber("010-0000-1111");
+		member.setNationality("삼국시대 오");
+		member.setEmail("jooyou@kakao.com");
+		member.setIntroduce("주유는 주유소에서 ㅋㅋ");
+		members.add(member);
+
+		member = new Member();
+		member.setName("황충");
+		member.setPhoneNumber("031-432-0000");
+		member.setNationality("삼국시대 촉한");
+		member.setEmail("yellowbug@naver.com");
+		member.setIntroduce("내 수염 좀 멋있는 듯");
+		members.add(member);
+		
+		model.addAttribute("members", members);
+		
+		
+		return "lesson05/quiz04";
+	}
+	
 }
