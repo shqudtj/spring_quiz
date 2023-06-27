@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.borders{
+	border: 1px solid #2AD8D2;
+}
+	
+.list-font, .list-font:hover {
+	color:black;
+	font-weight:bold;
+	border: 1px solid #2AD8D2;
+}	
+	
