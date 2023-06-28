@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.quiz.lesson06.dao.BookmarkMapper;
+import com.quiz.lesson06.domain.Bookmark;
 
 @Service
 public class BookmarkBO {
@@ -15,7 +16,11 @@ public class BookmarkBO {
 		bookmarkMapper.insertBookmark(title, address);
 	}
 	
-	public getLatestBookmark() {
-		reutn bookmarkMapper.selectBookmark(id);
+	public Bookmark getLatestBookmark() {
+		return bookmarkMapper.selectLatestBookmark();
+	}
+	
+	public Bookmark getBookmarkById(int id) {
+		return bookmarkMapper.selectBookmarkById(id);
 	}
 }

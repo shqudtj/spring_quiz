@@ -24,13 +24,13 @@
 				</tr>
 			</thead>
 			<tbody>
-			<%--  <c:forEach items="${ }" var="" varStatus="status"> --%>
+			<c:forEach items="${bookmark}" var="site" varStatus="status">
 				<tr>
 					<td>${status.count}</td>
-					<td>${0 }</td>
-					<td>${ 0}</td>
+					<td>${site.title}</td>
+					<td>${site.address}</td>
 				</tr>
-			<%-- </c:forEach> --%>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>

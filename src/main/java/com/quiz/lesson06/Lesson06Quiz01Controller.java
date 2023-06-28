@@ -43,8 +43,14 @@ public class Lesson06Quiz01Controller {
 			) {
 		
 		Bookmark bookmark = null;
+		// 마지막 db select
+		if (id == null) {
+			bookmark = bookmarkBO.getLatestBookmark();
+		} else {
+			bookmark = bookmarkBO.getBookmarkById(id);
+		}
 		
-		bookmarkBO.getBookmark(0);
+		model.addAttribute("bookmark", bookmark);
 		
 		return "lesson06/afterAddBookmark";
 	}

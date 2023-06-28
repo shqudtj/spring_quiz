@@ -20,7 +20,7 @@
  		)
  	</insert>
  	
- 	<select id="selectLatestBookmark" parameterType="int" resultType="com.quiz.lesson06.domain.Bookmark">
+ 	<select id="selectLatestBookmark" resultType="com.quiz.lesson06.domain.Bookmark">
  		SELECT
 			`id`
 			,`name`
@@ -31,6 +31,19 @@
 			`bookmark`
 		ORDER BY `id` DESC
 		LIMIT 1
+ 	</select>
+ 	
+ 	<select id="selectBookmarkById" parameterType="int" resultType="com.quiz.lesson06.domain.Bookmark">
+ 		SELECT
+			`id`
+			,`name`
+			,`url`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`bookmark`
+		WHERE
+			`id` = #{id}
  	</select>
  
  </mapper>
