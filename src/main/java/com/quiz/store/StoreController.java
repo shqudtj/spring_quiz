@@ -29,14 +29,14 @@ public class StoreController {
 		return "store/storeView";
 	}
 	
-	@GetMapping("/reviews")
-	public String reviews(
-			@RequestParam("storeId") int storeId,
-			@RequestParam("storeName") String storeName
-			) {
-		List<Review> reviewList = store
-		
-		
-		return "store/review";
-	}
+//	@GetMapping("/reviews")
+//	public String reviews(
+//			@RequestParam("storeId") int storeId,
+//			@RequestParam("storeName") String storeName
+//			) {
+//		List<Review> reviewList = store
+//		
+//		
+//		return "store/review";
+//	}
 }
