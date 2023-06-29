@@ -1,10 +1,13 @@
 package com.quiz.lesson06;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,30 +30,32 @@ public class Lesson06Quiz01Controller {
 	
 	@PostMapping("/add_bookmark")
 	@ResponseBody
-	public String addBookmark(
-			@RequestParam("title") String title,
-			@RequestParam("address") String address
+	public Map<String, Object> addBookmark(
+			@RequestParam("name") String name,
+			@RequestParam("url") String url
 			) {
-		bookmarkBO.addBookmark(title, address);
 		
-		return "성공";
+		// db insert
+		bookmarkBO.addBookmark(name, url);
+		
+		// 응답
+		// {"code":1, "result":"성공"}	JOSN String
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 1);
+		result.put("result", "성공");
+		
+		return result;
 	}
 	
 	@GetMapping("/after_add_bookmark_view")
 	public String afterAddBookmarkView(
-			@RequestParam(value = "id", required = false) Integer id,
 			Model model
 			) {
+		List<Bookmark> bookmarkList = bookmarkBO.getBookmarkList();
 		
-		Bookmark bookmark = null;
-		// 마지막 db select
-		if (id == null) {
-			bookmark = bookmarkBO.getLatestBookmark();
-		} else {
-			bookmark = bookmarkBO.getBookmarkById(id);
-		}
+		model.addAttribute("bookmarkList", bookmarkList);
+
 		
-		model.addAttribute("bookmark", bookmark);
 		
 		return "lesson06/afterAddBookmark";
 	}

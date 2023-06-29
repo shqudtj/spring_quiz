@@ -24,11 +24,11 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${bookmark}" var="site" varStatus="status">
+			<c:forEach items="${bookmarkList}" var="bookmark">
 				<tr>
-					<td>${status.count}</td>
-					<td>${site.title}</td>
-					<td>${site.address}</td>
+					<td>${bookmark.id}</td>
+					<td>${bookmark.name}</td>
+					<td>${bookmark.url}</td>
 				</tr>
 			</c:forEach>
 			</tbody>

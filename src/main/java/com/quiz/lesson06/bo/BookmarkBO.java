@@ -1,5 +1,7 @@
 package com.quiz.lesson06.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +14,12 @@ public class BookmarkBO {
 	@Autowired
 	private BookmarkMapper bookmarkMapper;
 	
-	public void addBookmark(String title, String address) {
-		bookmarkMapper.insertBookmark(title, address);
+	public void addBookmark(String name, String url) {
+		bookmarkMapper.insertBookmark(name, url);
 	}
 	
-	public Bookmark getLatestBookmark() {
-		return bookmarkMapper.selectLatestBookmark();
+	public List<Bookmark> getBookmarkList() {
+		return bookmarkMapper.selectBookmarkList();
 	}
 	
-	public Bookmark getBookmarkById(int id) {
-		return bookmarkMapper.selectBookmarkById(id);
-	}
 }

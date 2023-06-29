@@ -1,5 +1,7 @@
 package com.quiz.lesson06.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -9,10 +11,8 @@ import com.quiz.lesson06.domain.Bookmark;
 public interface BookmarkMapper {
 
 	public void insertBookmark(
-			@Param("title") String title,
-			@Param("address") String address);
+			@Param("name") String name,
+			@Param("url") String url);
 		
-	public Bookmark selectLatestBookmark();
-	
-	public Bookmark selectBookmarkById(int id);
+	public List<Bookmark> selectBookmarkList();
 }

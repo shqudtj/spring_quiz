@@ -20,7 +20,11 @@
 			
 		<div class="form-group">
 			<label for="url">주소</label>
-			<input type="text" id="url" class="form-control"><br>
+			<div class="d-flex">
+				<input type="text" id="url" class="form-control mr-2"><br>
+				<button id="urlCheckBtn" class="btn btn-info col-1">중복확인</button>
+			</div>
+			<small id="urlStatusArea"></small>
 		</div>
 		
 		<input type="button" id="addBtn" class="btn btn-success text-white btn-block" value="추가">
@@ -28,6 +32,36 @@
 	
 <script>
 	$(document).ready(function() {
+		
+		$('#urlCheckBtn').on('click', function() {
+			
+			let url = $('#url').val().trim();
+			
+			$.ajax({
+				type:"get"
+				, url:""
+				, data:{"url":url}
+			
+				, success:function(data) {
+					if (data.isDuplication) {
+						$('#urlStatusArea').append(
+							'<span class="text-danger">중복된 url입니다.</span>'		
+						);
+					} else {
+						$('#urlStatusArea').append(
+							'<span class="text-success">저장 가능한 url입니다.</span>'		
+						);
+					}
+						
+				}
+				
+				
+			});
+			
+			
+			
+		});
+		
 		$('#addBtn').on('click', function() {
 			// alert("클릭");
 			
@@ -54,7 +88,7 @@
 			$.ajax({
 				// request
 				type:"post"
-				, url:"/lesson06/quiz01/add_bookmark"
+				, url:"/lesson06/quiz02/add_bookmark2"
 				, data:{"name":name, "url":url}
 			
 				// response
