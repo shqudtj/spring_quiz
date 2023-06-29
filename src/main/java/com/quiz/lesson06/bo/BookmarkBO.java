@@ -22,4 +22,8 @@ public class BookmarkBO {
 		return bookmarkMapper.selectBookmarkList();
 	}
 	
+	public void deleteBookmark(String name) {
+		bookmarkMapper.deleteBookmark(name);
+	}
+	
 }

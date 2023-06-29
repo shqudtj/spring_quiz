@@ -97,7 +97,7 @@
 					/* alert(data.code);
 					alert(data.result); */
 					if (data.result == '성공') {
-						location.href = "/lesson06/quiz01/after_add_bookmark_view"; // GET method
+						location.href = "/lesson06/quiz02/after_add_bookmark_view2"; // GET method
 					} else {
 						alert ("즐겨찾기 입력에 실패했습니다.");
 					}

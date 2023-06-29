@@ -30,5 +30,13 @@
 		FROM
 			`bookmark`
  	</select>
+ 	
+ 	<delete id="deleteBookmark" parameterType="string">
+ 	DELETE
+ 	FROM
+ 		`bookmark`
+ 	WHERE
+ 		`name` = #{name}
+ 	</delete>
  
  </mapper>
