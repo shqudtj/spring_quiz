@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+#wrap {width:1200px;}
+
+nav {background-color:#D27328}
+
+footer {font-size:small; color:grey;}
+
+.nav-link, .nav-link:hover {color:white;}

@@ -16,6 +16,10 @@ public interface BookmarkMapper {
 		
 	public List<Bookmark> selectBookmarkList();
 	
-	public void deleteBookmark(String name);
+	public void deleteBookmarkByName(String name);
+
+	public Bookmark selectBookmarkByUrl(String url);
+	
+	public int deleteBookmarkById(int id);
 	
 }
