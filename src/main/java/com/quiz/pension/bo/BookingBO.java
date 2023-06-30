@@ -17,4 +17,8 @@ public class BookingBO {
 	public List<Booking> getBookingList() {
 		return bookingMapper.selectBookingList();
 	}
+	
+	public int deleteBookingById(int id) {
+		return bookingMapper.deleteBookingById(id);
+	}
 }

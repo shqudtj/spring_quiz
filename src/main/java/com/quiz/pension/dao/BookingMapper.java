@@ -10,4 +10,6 @@ import com.quiz.pension.domain.Booking;
 public interface BookingMapper {
 
 	public List<Booking> selectBookingList();
+	
+	public int deleteBookingById(int id);
 }

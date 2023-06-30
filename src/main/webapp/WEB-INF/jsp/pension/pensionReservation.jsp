@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>       
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,19 +18,20 @@
 <body>
 	<div class="container">
 		<div id="wrap">
-			<header class="bg-danger text-center"><h1>통나무 펜션</h1></header>
-			<nav class="">
+			<header class="d-flex justify-content-center align-items-center">
+				<div class="display-4">통나무 펜션</div>
+			</header>
+			<nav>
 				<ul class="nav nav-fill">
 					<li class="nav-item"><a href="#" class="nav-link menu-font">펜션소개</a></li>
 					<li class="nav-item"><a href="#" class="nav-link menu-font">객실보기</a></li>
-					<li class="nav-item"><a href="#" class="nav-link menu-font">예약하기</a></li>
-					<li class="nav-item"><a href="#" class="nav-link menu-font">예약목록</a></li>
+					<li class="nav-item"><a href="/pension/make_booking_view" class="nav-link menu-font">예약하기</a></li>
+					<li class="nav-item"><a href="/pension/pension_reservation_view" class="nav-link menu-font">예약목록</a></li>
 				</ul>
 			</nav>
-			<section class="content bg-primary">
-				<div class="bg-secondary text-center"><h3>예약 목록 보기</h3></div>
-				<div>
-					<table class="table">
+			<section class="contents">
+				<div class="text-center font-weight-bold m-4">예약 목록 보기</div>
+					<table class="table text-center">
 						<thead>
 							<tr>
 								<th>이름</th>
@@ -46,27 +48,66 @@
 							<tr>
 								<td>${booking.name}</td>
 								<td>
-									<!-- 스트링이니까 이걸 다시 date로 바꿧다가 해야함 -->
-									<fmt:formatDate value="${booking.date}" pattern="yyyy년 M월 dd일" var="pattern1" />
-									${pattern1}
+									<fmt:formatDate value="${booking.date}" pattern="yyyy년 M월 dd일" />
 								</td>
 								<td>${booking.day}</td>
 								<td>${booking.headcount}</td>
 								<td>${booking.phoneNumber}</td>
 								<td>${booking.state}</td>
-								<td>삭제</td>
+								<td>
+									<button type="button" class="deleteBtn btn btn-danger form-control text-white col-6" data-booking-id="${booking.id}">삭제</button>
+								</td>
 							</tr>
 						</c:forEach>
 						</tbody>
 					</table>
-				</div>
 			</section>
-			<footer class="bg-info ">
-				제주특별자치도 제주시 애월읍<br>
-				사업자등록번호:111-22-255222 / 농어촌민박사업자지정 / 대표:김통목<br>
-				Copyright © marondal 2021
+			<footer class="font-weight-small">
+					제주특별자치도 제주시 애월읍<br>
+					사업자등록번호:111-22-255222 / 농어촌민박사업자지정 / 대표:김통목<br>
+					Copyright © marondal 2021
 			</footer>
 		</div>
 	</div>
+	
+	<script>
+		$(document).ready(function() {
+			//alert("ㅎㅇ");
+			$('.deleteBtn').on('click', function() {
+				//alert("삭제버튼클릭");
+				
+				let deleteId = $(this).data('booking-id');
+				//alert(deleteId);
+				
+				$.ajax({
+					// request
+					type:"delete"
+					, url:"/pension/delete_booking"
+					, data: {"bookingId": deleteId}
+				
+					// response
+					, success: function(data) {
+						/* alert(data); */
+						if (data.code == 1) { // 성공
+							location.reload();
+						} else {
+							alert(data.errorMessage);
+						}
+					}
+					, error: function(request, status, error) {
+						alert("삭제하는데 실패했습니다. 관리자에게 문의해주세요.");
+					}
+					
+					
+				});
+				
+			});
+			
+		});	
+	
+	</script>
 </body>
 </html>
+
+
+
