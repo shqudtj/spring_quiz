@@ -21,4 +21,17 @@ public class BookingBO {
 	public int deleteBookingById(int id) {
 		return bookingMapper.deleteBookingById(id);
 	}
+	
+	public void addReservationBooking(Booking booking) {
+		bookingMapper.insertReservationBooking(booking);
+	}
+	
+	public Booking getBooking(int id) {
+		return bookingMapper.selectBookingById(id);
+	}
+	
+	public void searchBooking(String name, int phoneNumber) {
+		bookingMapper.selectBooking(name, phoneNumber);
+	}
+	
 }

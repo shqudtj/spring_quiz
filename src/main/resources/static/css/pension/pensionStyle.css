@@ -7,3 +7,13 @@ nav {background-color:#D27328}
 footer {font-size:small; color:grey;}
 
 .nav-link, .nav-link:hover {color:white;}
+
+.reserve {height:250px;}
+
+.reserve .real-time-reserved {background-color:#B1520F;}
+
+.reserve .confirm {background-color: #CF6317;}
+.reserve .inquiry {background-color:#B1520F;}
+.reserve-confirm {color:#fff; font-size: 25px; }
+
+.input-form {width:230px; height:30px; margin-left:10px;}

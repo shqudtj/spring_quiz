@@ -27,4 +27,67 @@
  			`id` = #{id}
  	</delete>
  
+ 	<insert id="insertReservationBooking" parameterType="com.quiz.pension.domain.Booking" useGeneratedKeys="true" keyProperty="id">
+ 		INSERT INTO `booking`
+ 		(
+ 			`name`
+			,`headcount`
+			,`day`
+			,`date`
+			,`phoneNumber`
+			,`state`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{name}
+ 			, #{headcount}
+ 			, #{day}
+ 			, #{date}
+ 			, #{phoneNumber}
+ 			, #{state}
+ 			, NOW()
+ 			, NOW()
+ 			
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectBookingById" parameterType="int" resultType="com.quiz.pension.domain.Booking">
+ 		SELECT
+ 			`id`
+			,`name`
+			,`headcount`
+			,`day`
+			,`date`
+			,`phoneNumber`
+			,`state`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`booking`
+ 		WHERE
+ 			`id` = ${id}
+ 	</select>
+ 	
+ 	
+ 	<select id="selectBooking" parameterType="map" resultType="com.quiz.pension.domain.Booking">
+ 		SELECT
+ 			`id`
+			,`name`
+			,`headcount`
+			,`day`
+			,`date`
+			,`phoneNumber`
+			,`state`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+				`booking`
+ 		WHERE
+ 			`name` = ${name}
+ 		AND
+ 			`phoneNumber` = ${phoneNumber}
+ 	</select>
+ 
  </mapper>
