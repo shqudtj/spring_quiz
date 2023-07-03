@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.quiz.pension.dao.BookingMapper;
 import com.quiz.pension.domain.Booking;
@@ -22,15 +23,20 @@ public class BookingBO {
 		return bookingMapper.deleteBookingById(id);
 	}
 	
-	public void addReservationBooking(Booking booking) {
-		bookingMapper.insertReservationBooking(booking);
+//	@RequestParam("name") String name,
+//	@RequestParam("date") String date,
+//	@RequestParam("day") int day,
+//	@RequestParam("headcount") int headcount,
+//	@RequestParam("phoneNumber") String phoneNumber,
+	public void addReservationBooking(String name, String date, int day, int headcount, String phoneNumber) {
+		bookingMapper.insertReservationBooking(name, date, day, headcount, phoneNumber);
 	}
 	
 	public Booking getBooking(int id) {
 		return bookingMapper.selectBookingById(id);
 	}
 	
-	public void searchBooking(String name, int phoneNumber) {
+	public void searchBooking(String name, String phoneNumber) {
 		bookingMapper.selectBooking(name, phoneNumber);
 	}
 	

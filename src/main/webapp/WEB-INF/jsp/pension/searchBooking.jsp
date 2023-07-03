@@ -101,7 +101,7 @@
 					, data: {"name" : name, "phoneNumber":phoneNumber}
 					
 					, success: function(data) {
-						if (data.code == 1) {
+						if (data.result == "성공") {
 							alert(name + phoneNumber);
 						} else {
 							alert("조회에 실패했습니다.");

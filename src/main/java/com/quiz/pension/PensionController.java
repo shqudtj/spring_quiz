@@ -69,12 +69,15 @@ public class PensionController {
 	@PostMapping("/pensionReservation")
 	@ResponseBody
 	public Map<String, Object> addReservationBooking(
-			@ModelAttribute Booking booking,
+			@RequestParam("name") String name,
+			@RequestParam("date") String date,
+			@RequestParam("day") int day,
+			@RequestParam("headcount") int headcount,
+			@RequestParam("phoneNumber") String phoneNumber,
 			Model model
 			) {
 
-		bookingBO.addReservationBooking(booking);
-		model.addAttribute("booking", model);
+		bookingBO.addReservationBooking(name, date, day, headcount, phoneNumber);
 		
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "성공");
@@ -111,7 +114,7 @@ public class PensionController {
 	@PostMapping("/searchBooking")
 	public Map<String, Object> searchBooking(
 				@RequestParam("name") String name,
-				@RequestParam("phoneNumber") int phoneNumber
+				@RequestParam("phoneNumber") String phoneNumber
 			) {
 		
 		bookingBO.searchBooking(name, phoneNumber);

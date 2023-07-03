@@ -15,11 +15,16 @@ public interface BookingMapper {
 	
 	public int deleteBookingById(int id);
 	
-	public void insertReservationBooking(Booking booking);
+	public void insertReservationBooking(
+			@Param("name") String name, 
+			@Param("date") String date,
+			@Param("day") int day,
+			@Param("headcount") int headcount, 
+			@Param("phoneNumber") String phoneNumber);
 	
 	public Booking selectBookingById(int id);
 	
 	public void selectBooking(
 			@Param("name") String name,
-			@Param("phoneNumber") int phoneNumber);
+			@Param("phoneNumber") String phoneNumber);
 }

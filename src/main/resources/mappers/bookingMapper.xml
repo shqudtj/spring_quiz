@@ -85,9 +85,9 @@
 		FROM
 				`booking`
  		WHERE
- 			`name` = ${name}
+ 			`name` = #{name}
  		AND
- 			`phoneNumber` = ${phoneNumber}
+ 			`phoneNumber` = #{phoneNumber}
  	</select>
  
  </mapper>
