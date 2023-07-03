@@ -37,6 +37,7 @@ public class PensionController {
 	}
 	
 	// 예약 삭제
+	// AJAX가 하는 요청
 	@DeleteMapping("/delete_booking")
 	@ResponseBody
 	public Map<String, Object> deleteBooking(
@@ -47,12 +48,12 @@ public class PensionController {
 		int row = bookingBO.deleteBookingById(id);
 		
 		Map<String, Object> result = new HashMap<>();
-		if (row == 1) { // 성공일때
+		if (row > 0) { // 성공일때
 			result.put("code", 1);
 			result.put("result", "성공");
 		} else { // 삭제된 행이 없음 -> 실패
 			result.put("code", 500);
-			result.put("result", "삭제될 데이터가 없습니다");
+			result.put("errorMessage", "삭제될 데이터가 없습니다");
 		}
 		
 		return result;
@@ -66,21 +67,32 @@ public class PensionController {
 	}
 	
 	// 예약하기
+	// AJAX가 하는 요청
 	@PostMapping("/pensionReservation")
 	@ResponseBody
-	public Map<String, Object> addReservationBooking(
+	public Map<String, Object> addPensionReservation(
 			@RequestParam("name") String name,
-			@RequestParam("date") String date,
+			@RequestParam("date") String date, // @DateTimeFormat을 붙이고(dao에) Date 객체로 받아와도 된다.
 			@RequestParam("day") int day,
 			@RequestParam("headcount") int headcount,
-			@RequestParam("phoneNumber") String phoneNumber,
-			Model model
+			@RequestParam("phoneNumber") String phoneNumber
 			) {
 
-		bookingBO.addReservationBooking(name, date, day, headcount, phoneNumber);
+		// insert
+		int row = bookingBO.addPensionReservation(name, date, day, headcount, phoneNumber);
 		
+		
+		// 응답
 		Map<String, Object> result = new HashMap<>();
-		result.put("result", "성공");
+		//result.put("result", "성공");
+		
+		if (row > 0) {
+			result.put("result", "성공");
+			result.put("code", 1);
+		} else {
+			result.put("errorMessage", "예약 데이터가 추가되지 못했습니다.");
+			result.put("code", 500);
+		}
 		
 		return result;
 	}
@@ -111,17 +123,26 @@ public class PensionController {
 		return "pension/searchBooking";
 	}
 	
+	
 	@PostMapping("/searchBooking")
+	@ResponseBody
 	public Map<String, Object> searchBooking(
 				@RequestParam("name") String name,
 				@RequestParam("phoneNumber") String phoneNumber
 			) {
 		
-		bookingBO.searchBooking(name, phoneNumber);
+		// select DB
+		Booking booking = bookingBO.searchBookingByNameAndPhoneNumber(name, phoneNumber);
 		
+		// 응답 JSON
 		Map<String, Object> result = new HashMap<>();
-		result.put("code", 1);
-		result.put("result", "성공");
+		if (booking == null) {
+			result.put("code", 300);
+			result.put("errorMessage", "예약 내역이 없습니다.");
+		} else {
+			result.put("code", 1);
+			result.put("booking", booking);
+		}
 		
 		return result;
 	}
@@ -131,3 +152,4 @@ public class PensionController {
 
 
 
+ 

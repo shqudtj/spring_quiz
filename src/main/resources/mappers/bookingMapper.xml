@@ -27,7 +27,7 @@
  			`id` = #{id}
  	</delete>
  
- 	<insert id="insertReservationBooking" parameterType="com.quiz.pension.domain.Booking" useGeneratedKeys="true" keyProperty="id">
+ 	<insert id="insertPensionReservation" parameterType="map">
  		INSERT INTO `booking`
  		(
  			`name`
@@ -46,7 +46,7 @@
  			, #{day}
  			, #{date}
  			, #{phoneNumber}
- 			, #{state}
+ 			, '대기중'
  			, NOW()
  			, NOW()
  			
@@ -67,11 +67,11 @@
 		FROM
 			`booking`
  		WHERE
- 			`id` = ${id}
+ 			`id` = #{id}
  	</select>
  	
  	
- 	<select id="selectBooking" parameterType="map" resultType="com.quiz.pension.domain.Booking">
+ 	<select id="selectBookingByNameAndPhoneNumber" parameterType="map" resultType="com.quiz.pension.domain.Booking">
  		SELECT
  			`id`
 			,`name`
@@ -83,11 +83,10 @@
 			,`createdAt`
 			,`updatedAt`
 		FROM
-				`booking`
+			`booking`
  		WHERE
  			`name` = #{name}
- 		AND
- 			`phoneNumber` = #{phoneNumber}
+ 			AND	`phoneNumber` = #{phoneNumber}
  	</select>
  
  </mapper>

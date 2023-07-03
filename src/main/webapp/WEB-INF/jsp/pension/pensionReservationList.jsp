@@ -48,7 +48,7 @@
 							<tr>
 								<td>${booking.name}</td>
 								<td>
-									<fmt:formatDate value="${booking.date}" pattern="yyyy년 M월 dd일" />
+									<fmt:formatDate value="${booking.date}" pattern="yyyy년 M월 d일" />
 								</td>
 								<td>${booking.day}</td>
 								<td>${booking.headcount}</td>
@@ -89,8 +89,10 @@
 					, success: function(data) {
 						/* alert(data); */
 						if (data.code == 1) { // 성공
+							alert("삭제 되었습니다.");
 							location.reload();
 						} else {
+							// {"code":500, "errorMesage":"삭제될 데이터가 없습니다."}
 							alert(data.errorMessage);
 						}
 					}
@@ -98,9 +100,7 @@
 						alert("삭제하는데 실패했습니다. 관리자에게 문의해주세요.");
 					}
 					
-					
 				});
-				
 			});
 			
 		});	

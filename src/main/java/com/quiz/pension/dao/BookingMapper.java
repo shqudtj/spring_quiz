@@ -15,7 +15,7 @@ public interface BookingMapper {
 	
 	public int deleteBookingById(int id);
 	
-	public void insertReservationBooking(
+	public int insertPensionReservation(
 			@Param("name") String name, 
 			@Param("date") String date,
 			@Param("day") int day,
@@ -24,7 +24,7 @@ public interface BookingMapper {
 	
 	public Booking selectBookingById(int id);
 	
-	public void selectBooking(
+	public List<Booking> selectBookingByNameAndPhoneNumber(
 			@Param("name") String name,
 			@Param("phoneNumber") String phoneNumber);
 }

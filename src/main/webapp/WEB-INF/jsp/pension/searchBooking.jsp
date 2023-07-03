@@ -89,30 +89,40 @@
 				
 				let name = $('#name').val().trim();
 				//alert(name);
-				
 				let phoneNumber = $('#phoneNumber').val().trim();
 				//alert(phoneNumber);
+				
+				if (name == '') {
+					alert("이름을 입력해주세요.");
+					return;
+				}
+				if (phoneNumber.length < 1) {
+					alert("전화번호를 입력해주세요.");
+					return;
+				}
 				
 				
 				$.ajax({
 					// request
 					type:"post"
 					, url:"/pension/searchBooking"
-					, data: {"name" : name, "phoneNumber":phoneNumber}
+					, data: {"name":name, "phoneNumber":phoneNumber}
 					
+					// response
 					, success: function(data) {
-						if (data.result == "성공") {
-							alert(name + phoneNumber);
+						if (data.code == 1) {
+							alert("이름" + data.booking.name
+									+ "\n날짜" + data.booking.date.slice(0, 10)
+									+ "\n일수" + data.booking.day
+									+ "\n인원" + data.booking.headcount
+									+ "\n상태" + data.booking.state);
 						} else {
-							alert("조회에 실패했습니다.");
+							alert(data.errorMessgae);
 						}
 					}
 					, error: function(request, status, error) {
 						alert("에러발생");
 					}	
-				
-					
-					
 					
 				});
 				

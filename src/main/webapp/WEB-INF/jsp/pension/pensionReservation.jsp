@@ -18,6 +18,8 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
+
+
 <link rel="stylesheet" type="text/css" href="/css/pension/pensionStyle.css">
 
 </head>
@@ -67,9 +69,8 @@
 			//alert('준비');
 			
 			$('#date').datepicker({
-				chaneMonth : true,
-				chaneYear : true,
 				dateFormat : "yy-mm-dd"
+				, minDate : 0
 				
 			});
 			
@@ -85,16 +86,24 @@
 					alert ('이름을 입력해주세요');
 					return;
 				}
-				if (date == '') {
+				if (date.length < 1) {
 					alert ('날짜를 선택해주세요');
 					return;
 				}
-				if (day == '') {
+				if (!day) {
 					alert ('숙박일수를 입력해주세요');
+					return;
+				}
+				if (isNaN(day)) { // 숫자가 아닐 때 참
+					alert('숫자만 입력 가능합니다.');
 					return;
 				}
 				if (headcount == '') {
 					alert ('숙박인원을 입력해주세요');
+					return;
+				}
+				if (isNaN(headcount)) { // 숫자가 아닐 때 참
+					alert('숫자만 입력 가능합니다.');
 					return;
 				}
 				if (phoneNumber == '') {
@@ -112,16 +121,15 @@
 					// request
 					type: "post"
 					, url: "/pension/pensionReservation"
-					, data: {"name" : name, "date" : date, "day" : day, "headcount" : headcount, "phoneNumber" : phoneNumber}
+					, data: {"name":name, "date":date, "day":day, "headcount":headcount, "phoneNumber":phoneNumber}
 					
 					// response
 					, success: function(data) {
 						if (data.result == "성공") {
 							alert('예약이 완료되었습니다');
-							
-							//location.href ="pension/afterpensionReservation";
+							location.href ="/pension/pension_reservationList_view";
 						} else {
-							alert('예약이 실패했습니다. 관리자에게 문의해주세요');
+							alert(data.errorMessage);
 						}
 					}
 					, error: function(request, status, error) {
@@ -129,8 +137,6 @@
 							//alert(status);
 							//alert(error);
 					}
-					
-					
 				});
 			});
 			

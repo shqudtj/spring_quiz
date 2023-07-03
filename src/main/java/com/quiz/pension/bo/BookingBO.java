@@ -23,21 +23,22 @@ public class BookingBO {
 		return bookingMapper.deleteBookingById(id);
 	}
 	
-//	@RequestParam("name") String name,
-//	@RequestParam("date") String date,
-//	@RequestParam("day") int day,
-//	@RequestParam("headcount") int headcount,
-//	@RequestParam("phoneNumber") String phoneNumber,
-	public void addReservationBooking(String name, String date, int day, int headcount, String phoneNumber) {
-		bookingMapper.insertReservationBooking(name, date, day, headcount, phoneNumber);
+	public int addPensionReservation(String name, String date, int day, int headcount, String phoneNumber) {
+		return bookingMapper.insertPensionReservation(name, date, day, headcount, phoneNumber);
 	}
 	
 	public Booking getBooking(int id) {
 		return bookingMapper.selectBookingById(id);
 	}
 	
-	public void searchBooking(String name, String phoneNumber) {
-		bookingMapper.selectBooking(name, phoneNumber);
+	public Booking searchBookingByNameAndPhoneNumber(String name, String phoneNumber) {
+		// 가능한 값 : [], [bookingA, bookingB,  ...]
+		List<Booking> bookingList = bookingMapper.selectBookingByNameAndPhoneNumber(name, phoneNumber);
+		if (bookingList.isEmpty()) {
+			return null;
+		}
+		
+		return bookingList.get(bookingList.size()-1);	// 마지막 값을 준다. => (최신 예약)
 	}
 	
 }
