@@ -46,23 +46,28 @@ public class Lesson07Quiz02RestController {
 //		return employmentRepository.findBySalaryGreaterThanEqual(9000);
 	}
 	
-//	@GetMapping("/5")
-	//계약직 목록을 연봉 기준으로 내림차순 정렬해서 3개
-//	public List<EmploymentEntity> getEmploymentListByTypeOrderByDesc() {
-//		return employmentRepository.findTop3ByTypeOrderBySalayDesc("계약직");
-//	}
+	@GetMapping("/5")
+//	계약직 목록을 연봉 기준으로 내림차순 정렬해서 3개
+	public List<EmploymentEntity> getEmploymentListByTypeOrderByDesc() {
+		return employmentRepository.findTop3ByTypeOrderBySalaryDesc("계약직");
+	}
 	
-//	@GetMapping("/6")
-	//성남시 분당구가 지역인 연봉 7000 이상 8500 이하인 공고
-//	public List<EmploymentEntity> getEmploymentListByRegion() {
-//		return employmentRepository.findByRegionAndSalaryBetween("성남시 분당구", 7000, 8500);
-//	}
+	@GetMapping("/6")
+//	성남시 분당구가 지역인 연봉 7000 이상 8500 이하인 공고
+	public List<EmploymentEntity> getEmploymentListByRegion() {
+		return employmentRepository.findByRegionAndSalaryBetween("성남시 분당구", 7000, 8500);
+	}
 	
 	@GetMapping("/7")
 //	마감일이 2026-04-10 이후이고 연봉이 8100 이상인 정규직 공고를 연봉 내림차순
 	public List<EmploymentEntity> getEmploymentListByDeadLint() {
-		employmentRepository.findByTypeAndDeadLineGreaterThanAndSalaryGreaterThanEqual("정규직", 2026-04-10, 8100);
+		return employmentRepository.findByTypeAndDeadLineAfterAndSalaryGreaterThanEqual("정규직", 2026-04-10, 8100);
 		
+	}
+	
+	@GetMapping("/8")
+	public List<EmploymentEntity> getEmploymentListBySalay() {
+		return employmentRepository.findBySalary(9000);
 	}
 }
 

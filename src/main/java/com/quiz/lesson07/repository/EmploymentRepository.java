@@ -1,5 +1,6 @@
 package com.quiz.lesson07.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,14 +18,18 @@ public interface EmploymentRepository extends JpaRepository<EmploymentEntity, In
 	public List<EmploymentEntity> findByPositionAndType(String position, String type);
 	public List<EmploymentEntity> findByTypeOrSalaryGreaterThanEqual(String type, int salary);
 	public List<EmploymentEntity> findBySalaryGreaterThanEqual(int salary);
-	public List<EmploymentEntity> findTop3ByTypeOrderBySalayDesc(String type);
+	public List<EmploymentEntity> findTop3ByTypeOrderBySalaryDesc(String type);
 	public List<EmploymentEntity> findByRegionAndSalaryBetween(String region, int start, int end);
 	
+	public List<EmploymentEntity> findBySalary(int salary);
+	
+	
+	
 	// native query
-	@Query(value = "select * from employment where type = :type, deadline = :deadline, salary = :salary")
-	public List<EmploymentEntity> findByTypeAndDeadLineGreaterThanAndSalaryGreaterThanEqual(
+	@Query(value = "select * from employment where type = :type, deadline >= :deadline, salary >= :salary", nativeQuery = true)
+	public List<EmploymentEntity> findByTypeAndDeadLineAfterAndSalaryGreaterThanEqual(
 			@Param("type") String type, 
-			@Param("deadline") String deadline, 
+			@Param("deadline") LocalDate deadline, 
 			@Param("salary") int salary);
 	
 }
