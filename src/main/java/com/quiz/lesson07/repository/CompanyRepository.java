@@ -10,4 +10,5 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, Integer>
 	// Spring data JPA
 	
 	// save() 메소드 생성됨
+	// findById 생성됨
 }
