@@ -14,7 +14,7 @@ import com.quiz.lesson07.entity.EmploymentEntity;
 public interface EmploymentRepository extends JpaRepository<EmploymentEntity, Integer> {
 
 	public List<EmploymentEntity> findById(int id);
-	public List<EmploymentEntity> findByCompanyId(int id);
+	public List<EmploymentEntity> findByCompanyId(int companyId);
 	public List<EmploymentEntity> findByPositionAndType(String position, String type);
 	public List<EmploymentEntity> findByTypeOrSalaryGreaterThanEqual(String type, int salary);
 	public List<EmploymentEntity> findBySalaryGreaterThanEqual(int salary);
@@ -25,11 +25,11 @@ public interface EmploymentRepository extends JpaRepository<EmploymentEntity, In
 	
 	
 	
-	// native query
-	@Query(value = "select * from employment where type = :type, deadline >= :deadline, salary >= :salary", nativeQuery = true)
-	public List<EmploymentEntity> findByTypeAndDeadLineAfterAndSalaryGreaterThanEqual(
-			@Param("type") String type, 
-			@Param("deadline") LocalDate deadline, 
-			@Param("salary") int salary);
+	// native query => DB에 직접 조회 (My sql 쿼리문)
+	@Query(value = "select * from employment where deadline > :deadline and salary >= :salary and type = :type order by salary desc", nativeQuery = true)
+	public List<EmploymentEntity> findByDeadLineAfterAndSalaryGreaterThanEqualAndTypeOrderBySalaryDesc(
+			@Param("deadline") String deadline, 
+			@Param("salary") int salary, 
+			@Param("type") String type);
 	
 }

@@ -60,9 +60,9 @@ public class Lesson07Quiz02RestController {
 	
 	@GetMapping("/7")
 //	마감일이 2026-04-10 이후이고 연봉이 8100 이상인 정규직 공고를 연봉 내림차순
-	public List<EmploymentEntity> getEmploymentListByDeadLint() {
-		return employmentRepository.findByTypeAndDeadLineAfterAndSalaryGreaterThanEqual("정규직", 2026-04-10, 8100);
-		
+	public List<EmploymentEntity> getEmploymentListByDeadline() {
+		return employmentRepository.findByDeadLineAfterAndSalaryGreaterThanEqualAndTypeOrderBySalaryDesc(
+				"2026-04-10", 8100, "정규직");
 	}
 	
 	@GetMapping("/8")
